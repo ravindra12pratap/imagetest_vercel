@@ -13,6 +13,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            background-color: #f4f4f4;
         }
     </style>
 </head>
@@ -22,12 +23,13 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            const rive = new Rive({
-                src: "/monet.riv", // Load from the public folder
+            const riveInstance = new Rive({
+                src: "/monet.riv",  // Ensure this path is correct
                 canvas: document.getElementById("riveCanvas"),
                 autoplay: true,
-                stateMachines: "State Machine 1", // Adjust based on your Rive file
-                onLoad: () => console.log("Rive animation loaded!"),
+                stateMachines: "State Machine 1",  // Ensure this matches the Rive file's state machine
+                onLoad: () => console.log("✅ Rive animation loaded successfully!"),
+                onError: (err) => console.error("❌ Error loading Rive animation:", err),
             });
         });
     </script>
