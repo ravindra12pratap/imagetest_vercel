@@ -35,7 +35,7 @@
             fetch("/monet.riv")
                 .then(response => {
                     if (!response.ok) {
-                        throw new Error("❌ monet.riv NOT found!");
+                        throw new Error("❌ monet.riv NOT found! Status: " + response.status);
                     }
                     console.log("✅ monet.riv FOUND!");
                     return response;
