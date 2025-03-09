@@ -19,18 +19,39 @@
 </head>
 <body>
     <h1>Rive Animation Preview</h1>
+
+    <!-- Debugging: Display an image -->
+    <h2>Checking File Loading:</h2>
+    <img src="/monet.jpg" alt="Test Image" width="300" onerror="alert('❌ monet.jpg NOT found!')" />
+    
+    <!-- Canvas for Rive animation -->
     <canvas id="riveCanvas" width="500" height="500"></canvas>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            const riveInstance = new Rive({
-                src: "/monet.riv",  // Ensure this path is correct
-                canvas: document.getElementById("riveCanvas"),
-                autoplay: true,
-                stateMachines: "State Machine 1",  // Ensure this matches the Rive file's state machine
-                onLoad: () => console.log("✅ Rive animation loaded successfully!"),
-                onError: (err) => console.error("❌ Error loading Rive animation:", err),
-            });
+            console.log("Checking if files exist...");
+
+            // Check if Rive file is found
+            fetch("/monet.riv")
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("❌ monet.riv NOT found!");
+                    }
+                    console.log("✅ monet.riv FOUND!");
+                    return response;
+                })
+                .then(() => {
+                    // Load Rive animation if the file is found
+                    new Rive({
+                        src: "/monet.riv",
+                        canvas: document.getElementById("riveCanvas"),
+                        autoplay: true,
+                        stateMachines: "State Machine 1", // Ensure this matches the Rive file's state machine
+                        onLoad: () => console.log("✅ Rive animation loaded successfully!"),
+                        onError: (err) => console.error("❌ Error loading Rive animation:", err),
+                    });
+                })
+                .catch(error => console.error(error.message));
         });
     </script>
 </body>
