@@ -21,10 +21,14 @@
     <canvas id="riveCanvas" width="500" height="500"></canvas>
 
     <script>
-        const rive = new Rive({
-            src: "monet.riv",  // Path to your Rive file
-            canvas: document.getElementById("riveCanvas"),
-            autoplay: true,
+        document.addEventListener("DOMContentLoaded", () => {
+            const rive = new Rive({
+                src: "/monet.riv", // Load from the public folder
+                canvas: document.getElementById("riveCanvas"),
+                autoplay: true,
+                stateMachines: "State Machine 1", // Adjust based on your Rive file
+                onLoad: () => console.log("Rive animation loaded!"),
+            });
         });
     </script>
 </body>
